@@ -23,6 +23,7 @@ namespace Prove.Example.Unit.MSTest
         [TestMethod]
         [Card("2", CardType.Story)]
         [DebuggerStepThrough]
+        [Requirement("Req-3")]
 
         public void MSTest_Fail_Example()
         {

@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Prove.Example.Load
 {
+    [Default(Profiles = new[] { Actors.WORKER }, Categories = new[] { "Work" })]
     public class WorkToDo
     {
-        [ActorAction(Profiles = new[] { Actors.WORKER }, InStates = new[] { "WorkToDo" }, OutState = "WorkItemQueued")]
+        [ActorAction(InStates = new[] { "WorkToDo" }, OutState = "WorkItemQueued")]
         [ReturnValueName("NextWorkItem")]
         [Card("8", Enums.CardType.Story)]
         public WorkItem Queue_Work_To_Do(Guid sessionId, List<WorkItem> work)
@@ -24,9 +25,10 @@ namespace Prove.Example.Load
             return work.First(wi => !wi.Completed);
         }
 
-        [ActorAction(Profiles = new[] { Actors.WORKER }, InStates = new[] { "WorkItemQueued" }, OutState = "WorkToDo")]
+        [ActorAction(InStates = new[] { "WorkItemQueued" }, OutState = "WorkToDo")]
         [PerformanceRequirement(180)]
         [Card("9", Enums.CardType.Story)]
+        [Requirement("Req-5")]
         public void Do_Some_Work(WorkItem nextWorkItem)
         {
             var rand = new Random(DateTime.Now.Millisecond);
@@ -36,7 +38,8 @@ namespace Prove.Example.Load
             nextWorkItem.Completed = true;
         }
 
-        [ActorAction(Profiles = new[] { Actors.WORKER }, InStates = new[] { "WorkItemQueued" }, OutState = "WorkItemQueued")]
+        [ActorAction(InStates = new[] { "WorkItemQueued" }, OutState = "WorkItemQueued")]
+        [Category(new[] { "Not Productive" })]
         public void Procrastinate(WorkItem nextWorkItem)
         {
             var rand = new Random(DateTime.Now.Millisecond);
@@ -44,7 +47,8 @@ namespace Prove.Example.Load
             Task.Delay(sleep).Wait();
         }
 
-        [ActorAction(Profiles = new[] { Actors.WORKER }, InStates = new[] { "WorkItemQueued" }, OutState = "WorkItemQueued")]
+        [ActorAction(InStates = new[] { "WorkItemQueued" }, OutState = "WorkItemQueued")]
+        [Category(new[] { "Not Productive" })]
         public void Go_Get_Coffee(WorkItem nextWorkItem)
         {
             var rand = new Random(DateTime.Now.Millisecond);

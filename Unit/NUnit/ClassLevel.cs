@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Prove.Example.Unit.NUnit
 {
     [TestFixture]
+    [Requirement("Req-9")]
     public class ClassLevel
     {
         protected static bool _initialized = false;

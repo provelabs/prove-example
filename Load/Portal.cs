@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace Prove.Example.Load
 {
+    [Default(InStates = new[] { "Portal" })]
     public class Portal
     {
-        [ActorAction(Profiles = new[] { Actors.WORKER }, InStates = new[] { "Portal" }, OutState = "WorkToDo")]
+        [ActorAction(Profiles = new[] { Actors.WORKER }, OutState = "WorkToDo")]
         [ReturnValueName("Work")]
         public List<WorkItem> Get_WorkItems_For_User(Guid sessionId)
         {
             return WorkItem.GenerateSomeWork(sessionId);
         }
 
-        [ActorAction(Profiles = new[] { Actors.ADMIN }, InStates = new[] { "Portal" })]
+        [ActorAction(Profiles = new[] { Actors.ADMIN })]
         public void Administer_Some_Things(Guid sessionId)
         {
             var rand = new Random(DateTime.Now.Millisecond);

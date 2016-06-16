@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Prove.Example.Unit.NUnit
 {
     [TestFixture]
+    [Requirement(new[] { "Req-1", "Req-2" })]
     public class Base
     {
         [Test]

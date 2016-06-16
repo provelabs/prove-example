@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Prove.Example.Unit.MSTest
 {
     [TestClass]
+    [Requirement("Req-8")]
     public class ClassLevel
     {
         protected static bool _initialized = false;
