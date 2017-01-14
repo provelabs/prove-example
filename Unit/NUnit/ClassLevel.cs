@@ -15,7 +15,7 @@ namespace Prove.Example.Unit.NUnit
     {
         protected static bool _initialized = false;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public static void Init()
         {
             _initialized = true;

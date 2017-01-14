@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 [SetUpFixture]
 public class AssemblyLevelSetup
 {
-    [SetUp]
+    [OneTimeSetUp]
     public void Init()
     {
         Initialised = true;
